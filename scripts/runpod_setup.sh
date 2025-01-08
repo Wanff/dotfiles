@@ -2,22 +2,14 @@
 
 # Setup linux dependencies
 su -c 'apt-get update && apt-get install sudo'
-sudo apt-get install less nano htop ncdu
+sudo apt-get install -y less nano htop ncdu
 
 # Setup virtual environment
-cd ~/
 pip install uv
 uv venv
 uv pip install simple-gpu-scheduler ipykernel # very useful on runpod with multi-GPUs https://pypi.org/project/simple-gpu-scheduler/
-source ~/venv/bin/activate
+source ./venv/bin/activate
 python -m ipykernel install --user --name=venv
-
-# Setup dotfiles and ZSH
-cd dotfiles
-./install.sh --zsh --tmux
-./deploy.sh
-cd ..
-chsh -s /usr/bin/zsh
 
 # Install gh and login
 curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
@@ -28,6 +20,14 @@ gh auth login --with-token
 
 git config --global user.email "rowankwang@gmail.com"
 git config --global user.name "Wanff"
+
+# Setup dotfiles and ZSH
+cd dotfiles
+./install.sh --zsh --tmux
+./deploy.sh
+cd ..
+chsh -s /usr/bin/zsh
+
 # 5) Project specific setup (uncomment and fill out)gh
 # git clone <github_url>
 # cd <repo_name>
