@@ -26,9 +26,9 @@ sudo apt update
 sudo apt install -y gh
 gh auth login --with-token
 
+git config --global user.email "rowankwang@gmail.com"
+git config --global user.name "Wanff"
 # 5) Project specific setup (uncomment and fill out)gh
 # git clone <github_url>
 # cd <repo_name>
-# git config --global user.email <email>
-# git config --global user.name <name>
 # pip install -r requirements.txt

@@ -15,25 +15,25 @@ alias hn="hostname"
 alias cl="clear"
 
 # file and directories
-alias rm='rm -i'
-alias rmd='rm -rf'
-alias cp='cp -i'
-alias mv='mv -i'
-alias mkdir='mkdir -p'
+alias rm='rm -i' # prompt before removing
+alias rmd='rm -rf' # remove directory and all files
+alias cp='cp -i' # prompt before overwriting
+alias mv='mv -i' # prompt before overwriting
+alias mkdir='mkdir -p' # create parent directories if they don't exist
 
 # find/read files
-alias h='head'
-alias t='tail'
-# alias rl="readlink -f"
-alias fd='find . -type d -name'
-alias ff='find . -type f -name'
-alias which='type -a'
+alias h='head' # show first 10 lines of file
+alias t='tail' # show last 10 lines of file
+# alias rl="readlink -f" # see custom_bins/rl
+alias fd='find . -type d -name' # find directories
+alias ff='find . -type f -name' # find files
+alias which='type -a' # show all instances of command
 
 # storage
 alias du='du -kh' # file space
 alias df='df -kTh' # disk space
-alias usage='du -sh * 2>/dev/null | sort -rh'
-alias dus='du -sckx * | sort -nr'
+alias usage='du -sh * 2>/dev/null | sort -rh' # show disk usage
+alias dus='du -sckx * | sort -nr' # show disk usage by size
 
 # add to path
 function add_to_path() {
@@ -82,18 +82,18 @@ alias gau="git add -u"
 alias gc="git commit -m"
 alias gp="git push"
 alias gpf="git push -f"
-alias gpo='git push origin $(git_current_branch)'
-alias gpp='git push --set-upstream origin $(git_current_branch)'
+alias gpo='git push origin $(git_current_branch)' # push to origin
+alias gpp='git push --set-upstream origin $(git_current_branch)' # push to origin and set upstream
 
-alias gg='git gui'
-alias glog='git log --oneline --all --graph --decorate'
+alias gg='git gui' # open git gui
+alias glog='git log --oneline --all --graph --decorate' # show git log
 
 alias gf="git fetch"
 alias gl="git pull"
 
 alias grb="git rebase"
 alias grbm="git rebase master"
-alias grbc="git rebase --continue"
+alias grbc="git rebase --continue" 
 alias grbs="git rebase --skip"
 alias grba="git rebase --abort"
 

@@ -24,33 +24,4 @@ source $CONFIG_DIR/key_bindings.sh
 
 add_to_path "${DOT_DIR}/custom_bins"
 
-if [ -d "$HOME/.pyenv" ]; then
-  export PYENV_ROOT="$HOME/.pyenv"
-  command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-  eval "$(pyenv init -)"
-fi
-
-
-if [ -d "$HOME/.local/bin/micromamba" ]; then
-  export MAMBA_EXE="$HOME/.local/bin/micromamba"
-  export MAMBA_ROOT_PREFIX="$HOME/micromamba"
-  __mamba_setup="$("$MAMBA_EXE" shell hook --shell zsh --root-prefix "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
-  if [ $? -eq 0 ]; then
-      eval "$__mamba_setup"
-  else
-      alias micromamba="$MAMBA_EXE"  # Fallback on help from mamba activate
-  fi
-  unset __mamba_setup
-fi
-
-FNM_PATH="$HOME/.local/share/fnm"
-if [ -d "$FNM_PATH" ]; then
-  export PATH="$FNM_PATH:$PATH"
-  eval "`fnm env`"
-fi
-
-export ASK_SH_OPENAI_API_KEY=$(cat $HOME/.openai_api_key)
-export ASK_SH_OPENAI_MODEL=gpt-4o-mini
-eval "$(ask-sh --init)"
-
 cat $CONFIG_DIR/start.txt
