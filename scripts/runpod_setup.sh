@@ -1,34 +1,32 @@
 #!/bin/bash
 
-# 1) Setup linux dependencies
+# Setup linux dependencies
 su -c 'apt-get update && apt-get install sudo'
 sudo apt-get install less nano htop ncdu
 
-# 2) Setup virtual environment
-pip install virtualenv ipykernel
-pip install simple-gpu-scheduler # very useful on runpod with multi-GPUs https://pypi.org/project/simple-gpu-scheduler/
-virtualenv --python python3.11 ~/venv
+# Setup virtual environment
+cd ~/
+pip install uv
+uv venv
+uv pip install simple-gpu-scheduler ipykernel # very useful on runpod with multi-GPUs https://pypi.org/project/simple-gpu-scheduler/
 source ~/venv/bin/activate
 python -m ipykernel install --user --name=venv
 
-# 3) Setup SSH key
-ssh-keygen -t ed25519 -C "$email"
-cat /root/.ssh/id_ed25519.pub
-read -p "Have you added the SSH key to https://github.com/settings/keys? (y/Y/yes to continue): " response
-while [[ ! "$response" =~ ^([yY][eE][sS]|[yY])$ ]]; do
-    read -p "Please type 'y', 'Y', or 'yes' after adding the SSH key: " response
-done
-
-# 4) Setup dotfiles and ZSH
-mkdir git && cd git
-git clone git@github.com:jplhughes/dotfiles.git
+# Setup dotfiles and ZSH
 cd dotfiles
-./install --zsh --tmux
+./install.sh --zsh --tmux
 ./deploy.sh
 cd ..
 chsh -s /usr/bin/zsh
 
-# 5) Project specific setup (uncomment and fill out)
+# Install gh and login
+curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+sudo apt update
+sudo apt install -y gh
+gh auth login --with-token
+
+# 5) Project specific setup (uncomment and fill out)gh
 # git clone <github_url>
 # cd <repo_name>
 # git config --global user.email <email>
