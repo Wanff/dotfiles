@@ -3,7 +3,7 @@
 # Setup linux dependencies
 su -c 'apt-get update && apt-get install sudo'
 sudo apt-get install -y less nano htop ncdu
-
+sudo apt install vim 
 # Setup virtual environment
 pip install uv
 uv venv
