@@ -5,10 +5,11 @@ su -c 'apt-get update && apt-get install sudo'
 sudo apt-get install -y less nano htop ncdu
 sudo apt install vim 
 # Setup virtual environment
+cd /workspace
 pip install uv
 uv venv
 uv pip install simple-gpu-scheduler ipykernel # very useful on runpod with multi-GPUs https://pypi.org/project/simple-gpu-scheduler/
-source ./.venv/bin/activate
+source .venv/bin/activate
 python -m ipykernel install --user --name=venv
 
 # Install gh and login
@@ -22,7 +23,7 @@ git config --global user.email "rowankwang@gmail.com"
 git config --global user.name "Wanff"
 
 # Setup dotfiles and ZSH
-cd dotfiles
+cd ~/dotfiles
 ./install.sh --zsh --tmux
 ./deploy.sh
 cd ..
