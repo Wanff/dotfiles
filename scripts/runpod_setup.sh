@@ -3,7 +3,7 @@
 # Setup linux dependencies
 su -c 'apt-get update && apt-get install sudo'
 sudo apt-get install -y less nano htop ncdu
-sudo apt install vim 
+sudo apt install -y vim 
 # Setup virtual environment
 cd /workspace
 pip install uv
@@ -21,6 +21,19 @@ gh auth login
 
 git config --global user.email "rowankwang@gmail.com"
 git config --global user.name "Wanff"
+
+# 1) Generate the dircolors template
+dircolors -p > ~/.dircolors
+
+# 2) Append "OTHER_WRITABLE 37;42" using Vim in silent-ex mode
+vim -Es ~/.dircolors <<-EOF
+  $       " Go to the end of the file
+  oOTHER_WRITABLE 37;42
+  wq      " Write and quit
+EOF
+
+# 3) Apply the new settings
+eval "$(dircolors -b ~/.dircolors)"
 
 # Setup dotfiles and ZSH
 cd ~/dotfiles
