@@ -9,7 +9,7 @@ export TERM="xterm-256color"
 #share various caches on network drive instead of local 
 export UV_CACHE_DIR="/workspace/.cache"
 export HF_HOME="/workspace/.cache"
-export LC_ALL=en_IN.UTF-8
+#export LC_ALL=en_IN.UTF-8
 export LANG=en_IN.UTF-8
 
 ZSH_DISABLE_COMPFIX=true
